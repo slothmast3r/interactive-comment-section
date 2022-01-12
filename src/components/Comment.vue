@@ -103,6 +103,9 @@ export default {
         font-weight: 700;
       }
     }
+    .comment-text{
+      margin-top: 10px;
+    }
   }
 }
 </style>
