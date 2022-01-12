@@ -7,7 +7,7 @@
         :rating-score="el.score"
         :comment-content="el.content"
         :user="el.user"
-        :username="el.username"
+        :created-at="el.createdAt"
       />
       Challenge by <a
         href="https://www.frontendmentor.io?ref=challenge"

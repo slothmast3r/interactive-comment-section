@@ -4,7 +4,7 @@
       <div class="plus element">
         <img
           alt="Plus"
-          :src="require('/src/images/icon-plus.svg')"
+          :src="require('/src/assets/images/icon-plus.svg')"
         >
       </div>
       <div class="count element">
@@ -13,20 +13,25 @@
       <div class="minus element">
         <img
           alt="Minus"
-          :src="require('/src/images/icon-minus.svg')"
+          :src="require('/src/assets/images/icon-minus.svg')"
         >
       </div>
     </div>
     <div class="content-wrapper">
       <div class="person-and-time">
-        <img :src="require(user.image.png)">
-        {{ username }}
+        <img  :src="getImgUrl(user.image.png)">
+        <div class="username-text">
+          {{ user.username }}
+        </div>
+        <div class="time-text">
+          {{ createdAt }}
+        </div>
+      </div>
+      <div class="comment-text">
+        {{ commentContent }}
       </div>
     </div>
-    <div class="reply" />
-    <div class="comment-text">
-      {{ commentContent }}
-    </div>
+    <div class="reply-button" />
   </div>
 </template>
 
@@ -42,7 +47,7 @@ export default {
       default: '',
       type: String,
     },
-    username: {
+    createdAt: {
       default: '',
       type: String,
     },
@@ -51,26 +56,52 @@ export default {
       type: Object,
     }
   },
+  data(){
+    return {
+    }
+  },
+  methods: {
+    getImgUrl(url) {
+      return require('@/assets/' + url.substring(2))
+    }
+  }
+
 }
 </script>
 
 <style scoped lang="scss">
 
 .comment-wrapper{
+  margin: 20px;
   border-radius: 5px;
   padding: 15px;
   display: flex;
   background: $white;
-  text-align: center;
   position: relative;
   .comment-rating{
     padding: 0 5px;
     color: $moderateBlue;
     font-weight: 700;
     border-radius: 8px;
+    text-align: center;
     background: $veryLightGray;
     .element{
       margin: 5px 5px;
+    }
+  }
+  .content-wrapper {
+    margin-left: 20px;
+    img{
+      width: 30px;
+      height: 30px;
+    }
+    .person-and-time {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      .username-text {
+        font-weight: 700;
+      }
     }
   }
 }
