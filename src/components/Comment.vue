@@ -18,11 +18,13 @@
       </div>
     </div>
     <div class="content-wrapper">
-      <div class="person-and-time" />
+      <div class="person-and-time">
+        {{ username }}
+      </div>
     </div>
     <div class="reply" />
     <div class="comment-text">
-      {{ content }}
+      {{ commentContent }}
     </div>
   </div>
 </template>
@@ -35,9 +37,17 @@ export default {
       default: 0,
       type: Number,
     },
-    content:{
+    commentContent: {
       default: '',
       type: String,
+    },
+    username: {
+      default: '',
+      type: String,
+    },
+    user: {
+      default: undefined,
+      type: Object,
     }
   },
 }

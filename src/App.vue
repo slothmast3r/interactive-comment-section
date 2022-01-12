@@ -5,7 +5,9 @@
         v-for="el in comments"
         :key="el.id"
         :rating-score="el.score"
-        :content="el.content"
+        :comment-content="el.content"
+        :user="el.user"
+        :username="el.username"
       />
       Challenge by <a
         href="https://www.frontendmentor.io?ref=challenge"
