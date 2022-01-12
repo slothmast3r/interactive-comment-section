@@ -4,7 +4,7 @@
       <div class="plus element">
         <img
           alt="Plus"
-          :src="require('/src/assets/images/icon-plus.svg')"
+          :src="require('/src/images/icon-plus.svg')"
         >
       </div>
       <div class="count element">
@@ -13,12 +13,13 @@
       <div class="minus element">
         <img
           alt="Minus"
-          :src="require('/src/assets/images/icon-minus.svg')"
+          :src="require('/src/images/icon-minus.svg')"
         >
       </div>
     </div>
     <div class="content-wrapper">
       <div class="person-and-time">
+        <img :src="require(user.image.png)">
         {{ username }}
       </div>
     </div>
