@@ -1,16 +1,29 @@
 <template>
   <div class="comment-wrapper">
     <div class="comment-rating">
-      <div class="plus element"><img alt="Plus" :src="require('/src/assets/images/icon-plus.svg')"></div>
-      <div class="count element">{{ ratingCount }}</div>
-      <div class="minus element"><img alt="Minus" :src="require('/src/assets/images/icon-minus.svg')"></div>
+      <div class="plus element">
+        <img
+          alt="Plus"
+          :src="require('/src/assets/images/icon-plus.svg')"
+        >
+      </div>
+      <div class="count element">
+        {{ ratingScore }}
+      </div>
+      <div class="minus element">
+        <img
+          alt="Minus"
+          :src="require('/src/assets/images/icon-minus.svg')"
+        >
+      </div>
     </div>
     <div class="content-wrapper">
-      <div class="person-and-time"></div>
-
+      <div class="person-and-time" />
     </div>
-    <div class="reply"></div>
-    <div class="comment-text"> </div>
+    <div class="reply" />
+    <div class="comment-text">
+      {{ content }}
+    </div>
   </div>
 </template>
 
@@ -18,9 +31,13 @@
 export default {
   name: "Comment",
   props: {
-    ratingCount: {
+    ratingScore: {
       default: 0,
       type: Number,
+    },
+    content:{
+      default: '',
+      type: String,
     }
   },
 }
@@ -36,8 +53,9 @@ export default {
   text-align: center;
   position: relative;
   .comment-rating{
-    padding: 0px 5px;
-
+    padding: 0 5px;
+    color: $moderateBlue;
+    font-weight: 700;
     border-radius: 8px;
     background: $veryLightGray;
     .element{

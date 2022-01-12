@@ -1,8 +1,16 @@
 <template>
   <div>
     <div class="attribution">
-      <comment></comment>
-      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+      <comment
+        v-for="el in comments"
+        :key="el.id"
+        :rating-score="el.score"
+        :content="el.content"
+      />
+      Challenge by <a
+        href="https://www.frontendmentor.io?ref=challenge"
+        target="_blank"
+      >Frontend Mentor</a>.
       Coded by <a href="https://github.com/slothmast3r">slothmast3r</a>.
     </div>
   </div>
@@ -11,7 +19,7 @@
 <script>
 
 import Comment from "@/components/Comment";
-import * as data from '/data/data.json'
+import data from '/data/data.json'
 
 
 export default {
@@ -25,6 +33,8 @@ export default {
       comments: data.comments
     }
   },
+  created() {
+  }
 }
 </script>
 
