@@ -2,7 +2,7 @@
   <div>
     <div class="attribution">
       <comment
-        v-for="el in comments"
+        v-for="el in $store.state.comments"
         :key="el.id"
         :rating-score="el.score"
         :comment-content="el.content"
@@ -21,7 +21,7 @@
 <script>
 
 import Comment from "@/components/Comment";
-import data from '/data/data.json'
+import data from '/data/data.json';
 
 
 export default {
@@ -36,10 +36,8 @@ export default {
     }
   },
   created() {
-    console.log(this.$store.state.count)
-    this.$store.commit('increment')
-
-    console.log(this.$store.state.count)
+    if(this.$store.state.comments.length <= 0)
+      this.$store.commit('saveComments',this.comments)
   }
 }
 </script>

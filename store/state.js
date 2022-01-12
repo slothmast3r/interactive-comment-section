@@ -1,6 +1,7 @@
 
 export function state () {
     return {
-        count: 3,
+        count: 0,
+        comments: [],
     }
 }
