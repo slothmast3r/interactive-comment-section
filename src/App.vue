@@ -12,6 +12,7 @@
         :user-score="el.userScore"
         :replies="el.replies"
       />
+      <comment-text-area :current-user="currentUser"/>
       Challenge by <a
         href="https://www.frontendmentor.io?ref=challenge"
         target="_blank"
@@ -25,11 +26,13 @@
 
 import Comment from "@/components/Comment";
 import data from '/data/data.json';
+import CommentTextArea from "@/components/CommentTextArea";
 
 
 export default {
   name: 'App',
   components: {
+    CommentTextArea,
     Comment
   },
   data(){
