@@ -2,24 +2,18 @@
   <div class="comment-wrapper">
     <div class="comment-rating">
       <div class="plus element">
-        <img
-          alt="Plus"
-          :src="require('/src/assets/images/icon-plus.svg')"
-        >
+        <plus-sign :active="false" />
       </div>
       <div class="count element">
         {{ ratingScore }}
       </div>
       <div class="minus element">
-        <img
-          alt="Minus"
-          :src="require('/src/assets/images/icon-minus.svg')"
-        >
+        <minus-sign :active="false" />
       </div>
     </div>
     <div class="content-wrapper">
       <div class="person-and-time">
-        <img  :src="getImgUrl(user.image.png)">
+        <img :src="getImgUrl(user.image.png)">
         <div class="username-text">
           {{ user.username }}
         </div>
@@ -36,8 +30,11 @@
 </template>
 
 <script>
+import PlusSign from "@/assets/PlusSign";
+import MinusSign from "@/assets/MinusSign";
 export default {
   name: "Comment",
+  components: {MinusSign, PlusSign},
   props: {
     ratingScore: {
       default: 0,
