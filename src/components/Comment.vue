@@ -1,48 +1,62 @@
 <template>
-  <div class="comment-wrapper">
-    <div class="comment-rating">
-      <div
-        class="plus sign element"
-        @click="changeScore(1)"
-      >
-        <plus-sign
-          :active="userScore === 1"
-        />
-      </div>
-      <div
-        class="count element"
-      >
-        {{ ratingScore + userScore }}
-      </div>
-      <div
-        class="minus sign element"
-        @click="changeScore(-1)"
-      >
-        <minus-sign
-          :active="userScore === -1"
-        />
-      </div>
-    </div>
-    <div class="content-wrapper">
-      <div class="person-and-time">
-        <img
-          alt="avatar"
-          :src="getImgUrl(user.image.png)"
+  <div>
+    <div class="comment-wrapper">
+      <div class="comment-rating">
+        <div
+          class="plus sign element"
+          @click="changeScore(1)"
         >
-        <div class="username-text">
-          {{ user.username }}
+          <plus-sign
+            :active="userScore === 1"
+          />
         </div>
-        <div class="time-text">
-          {{ createdAt }}
+        <div
+          class="count element"
+        >
+          {{ ratingScore + userScore }}
+        </div>
+        <div
+          class="minus sign element"
+          @click="changeScore(-1)"
+        >
+          <minus-sign
+            :active="userScore === -1"
+          />
         </div>
       </div>
-      <div class="comment-text">
-        {{ commentContent }}
+      <div class="content-wrapper">
+        <div class="person-and-time">
+          <img
+            alt="avatar"
+            :src="getImgUrl(user.image.png)"
+          >
+          <div class="username-text">
+            {{ user.username }}
+          </div>
+          <div class="time-text">
+            {{ createdAt }}
+          </div>
+        </div>
+        <div class="comment-text">
+          {{ commentContent }}
+        </div>
+      </div>
+      <div class="reply-button">
+        <reply-icon :active="false" />
+        <div>Reply</div>
       </div>
     </div>
-    <div class="reply-button">
-      <reply-icon :active="false" />
-      <div>Reply</div>
+    <div class="reply-wrapper">
+      <comment
+        v-for="reply in replies"
+        :key="reply.id"
+        :rating-score="reply.score"
+        :comment-content="reply.content"
+        :user="reply.user"
+        :created-at="reply.createdAt"
+        :comment-id="reply.id"
+        :user-score="reply.userScore"
+      />
     </div>
   </div>
 </template>
@@ -78,6 +92,10 @@ export default {
     userScore:{
       default: null,
       type: Number
+    },
+    replies:{
+      default: function (){return []},
+      type: Array
     }
 
   },
@@ -152,5 +170,10 @@ export default {
     align-items: center;
     gap: 10px
   }
+}
+.reply-wrapper{
+  border-left: 1px solid $lightGray;
+  padding-left: 20px;
+  margin-left: 50px;
 }
 </style>

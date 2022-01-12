@@ -10,6 +10,7 @@
         :created-at="el.createdAt"
         :comment-id="el.id"
         :user-score="el.userScore"
+        :replies="el.replies"
       />
       Challenge by <a
         href="https://www.frontendmentor.io?ref=challenge"
