@@ -13,7 +13,7 @@
     </div>
     <div class="content-wrapper">
       <div class="person-and-time">
-        <img :src="getImgUrl(user.image.png)">
+        <img alt="avatar" :src="getImgUrl(user.image.png)">
         <div class="username-text">
           {{ user.username }}
         </div>
@@ -25,16 +25,20 @@
         {{ commentContent }}
       </div>
     </div>
-    <div class="reply-button" />
+    <div class="reply-button" >
+      <reply-icon :active="false" />
+      <div>Reply</div>
+    </div>
   </div>
 </template>
 
 <script>
 import PlusSign from "@/assets/PlusSign";
 import MinusSign from "@/assets/MinusSign";
+import ReplyIcon from "@/assets/ReplyIcon";
 export default {
   name: "Comment",
-  components: {MinusSign, PlusSign},
+  components: {ReplyIcon, MinusSign, PlusSign},
   props: {
     ratingScore: {
       default: 0,
@@ -103,6 +107,17 @@ export default {
     .comment-text{
       margin-top: 10px;
     }
+  }
+  .reply-button{
+    cursor: pointer;
+    display: flex;
+    position: absolute;
+    font-weight: 700;
+    right: 0;
+    padding: 0 20px;
+    color: $moderateBlue;
+    align-items: center;
+    gap: 10px
   }
 }
 </style>
