@@ -1,7 +1,8 @@
 
 export function state () {
     return {
-        count: 0,
+        lastId: 4,
         comments: [],
+        commentDict: {}
     }
 }

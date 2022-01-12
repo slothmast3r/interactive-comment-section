@@ -1,19 +1,34 @@
 <template>
   <div class="comment-wrapper">
     <div class="comment-rating">
-      <div class="plus element">
-        <plus-sign :active="false" />
+      <div
+        class="plus sign element"
+        @click="changeScore(1)"
+      >
+        <plus-sign
+          :active="userScore === 1"
+        />
       </div>
-      <div class="count element">
-        {{ ratingScore }}
+      <div
+        class="count element"
+      >
+        {{ ratingScore + userScore }}
       </div>
-      <div class="minus element">
-        <minus-sign :active="false" />
+      <div
+        class="minus sign element"
+        @click="changeScore(-1)"
+      >
+        <minus-sign
+          :active="userScore === -1"
+        />
       </div>
     </div>
     <div class="content-wrapper">
       <div class="person-and-time">
-        <img alt="avatar" :src="getImgUrl(user.image.png)">
+        <img
+          alt="avatar"
+          :src="getImgUrl(user.image.png)"
+        >
         <div class="username-text">
           {{ user.username }}
         </div>
@@ -25,7 +40,7 @@
         {{ commentContent }}
       </div>
     </div>
-    <div class="reply-button" >
+    <div class="reply-button">
       <reply-icon :active="false" />
       <div>Reply</div>
     </div>
@@ -55,7 +70,16 @@ export default {
     user: {
       default: undefined,
       type: Object,
+    },
+    commentId:{
+      default: null,
+      type: Number
+    },
+    userScore:{
+      default: null,
+      type: Number
     }
+
   },
   data(){
     return {
@@ -64,7 +88,13 @@ export default {
   methods: {
     getImgUrl(url) {
       return require('@/assets/' + url.substring(2))
-    }
+    },
+    changeScore(score){
+      if(score === this.userScore){
+        score = 0
+      }
+      this.$store.commit('addUserScoreById', {commentId:this.commentId, userScore: score})
+    },
   }
 
 }
@@ -86,6 +116,9 @@ export default {
     border-radius: 8px;
     text-align: center;
     background: $veryLightGray;
+    .sign{
+      cursor: pointer;
+    }
     .element{
       margin: 5px 5px;
     }

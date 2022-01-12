@@ -8,6 +8,8 @@
         :comment-content="el.content"
         :user="el.user"
         :created-at="el.createdAt"
+        :comment-id="el.id"
+        :user-score="el.userScore"
       />
       Challenge by <a
         href="https://www.frontendmentor.io?ref=challenge"
@@ -36,8 +38,12 @@ export default {
     }
   },
   created() {
-    if(this.$store.state.comments.length <= 0)
-      this.$store.commit('saveComments',this.comments)
+    if(this.$store.state.comments.length <= 0) {
+      this.$store.commit('saveComments', this.comments)
+    }
+  },
+  methods:{
+
   }
 }
 </script>
