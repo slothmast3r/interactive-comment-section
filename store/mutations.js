@@ -18,11 +18,12 @@ export const mutations = {
             if(comment.id === id){
                 comment.userScore = payload.userScore
             }
-            for (let reply of comment.replies) {
-                if(reply.id === id){
-                    reply.userScore = payload.userScore
+            if(comment.replies)
+                for (let reply of comment.replies) {
+                    if(reply.id === id){
+                        reply.userScore = payload.userScore
+                    }
                 }
-            }
         }
     }
 }

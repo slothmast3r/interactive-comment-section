@@ -47,12 +47,13 @@ export default {
     },
     sendReply(){
       let payload = {
-        id: this.$store.state.id,
+        id: this.$store.state.lastId,
         content: this.commentText,
         score: 0,
         user: this.currentUser,
         createdAt: new Date()
       }
+      this.$store.commit('increment')
       this.$emit('send-reply',payload)
       this.commentText = ''
     }

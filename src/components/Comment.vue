@@ -34,7 +34,7 @@
             {{ user.username }}
           </div>
           <div class="time-text">
-            {{ createdAt }}
+            {{ showDate }}
           </div>
         </div>
         <div class="comment-text">
@@ -65,6 +65,7 @@
 import PlusSign from "@/assets/PlusSign";
 import MinusSign from "@/assets/MinusSign";
 import ReplyIcon from "@/assets/ReplyIcon";
+import moment from "moment";
 export default {
   name: "Comment",
   components: {ReplyIcon, MinusSign, PlusSign},
@@ -90,7 +91,7 @@ export default {
       type: Number
     },
     userScore:{
-      default: null,
+      default: 0,
       type: Number
     },
     replies:{
@@ -103,6 +104,15 @@ export default {
     return {
     }
   },
+  computed:{
+    showDate(){
+      return moment(this.createdAt).isValid()? moment(this.createdAt).fromNow() : this.createdAt
+    }
+  },
+  created() {
+
+    moment.suppressDeprecationWarnings = true;
+  },
   methods: {
     getImgUrl(url) {
       return require('@/assets/' + url.substring(2))
@@ -111,7 +121,7 @@ export default {
       if(score === this.userScore){
         score = 0
       }
-      this.$store.commit('addUserScoreById', {commentId:this.commentId, userScore: score})
+      this.$store.commit('addUserScoreById', {commentId: this.commentId, userScore: score})
     },
   }
 
