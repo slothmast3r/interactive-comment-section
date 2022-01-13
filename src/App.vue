@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app">
     <div class="attribution">
       <comment
         v-for="el in $store.state.comments"
@@ -73,5 +73,8 @@ body{
   color: #2c3e50;
   margin-top: 60px;
   font-size: 16px;
+  align-items: center;
+  margin-left: 15%;
+  margin-right: 15%;
 }
 </style>
