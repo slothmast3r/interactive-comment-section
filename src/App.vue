@@ -11,6 +11,7 @@
         :comment-id="el.id"
         :user-score="el.userScore"
         :replies="el.replies"
+        :current-user="currentUser"
       />
       <comment-text-area
         :current-user="currentUser"

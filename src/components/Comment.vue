@@ -33,6 +33,12 @@
           <div class="username-text">
             {{ user.username }}
           </div>
+          <div
+            v-if="isYou"
+            class="you-tag"
+          >
+            you
+          </div>
           <div class="time-text">
             {{ showDate }}
           </div>
@@ -41,9 +47,19 @@
           {{ commentContent }}
         </div>
       </div>
-      <div class="reply-button">
+      <div
+        v-if="!isYou"
+        class="left-buttons"
+      >
         <reply-icon :active="false" />
         <div>Reply</div>
+      </div>
+      <div
+        v-else
+        class="left-buttons"
+      >
+        <div>Delete</div>
+        <div>Edit</div>
       </div>
     </div>
     <div class="reply-wrapper">
@@ -56,6 +72,7 @@
         :created-at="reply.createdAt"
         :comment-id="reply.id"
         :user-score="reply.userScore"
+        :current-user="currentUser"
       />
     </div>
   </div>
@@ -80,7 +97,7 @@ export default {
     },
     createdAt: {
       default: '',
-      type: String,
+      type: String || Date,
     },
     user: {
       default: undefined,
@@ -97,6 +114,12 @@ export default {
     replies:{
       default: function (){return []},
       type: Array
+    },
+    currentUser:{
+      default: function (){
+        return {username: ''}
+      },
+      type: Object
     }
 
   },
@@ -107,7 +130,10 @@ export default {
   computed:{
     showDate(){
       return moment(this.createdAt).isValid()? moment(this.createdAt).fromNow() : this.createdAt
-    }
+    },
+    isYou(){
+      return this.user.username === this.currentUser.username
+    },
   },
   created() {
 
@@ -161,6 +187,13 @@ export default {
       display: flex;
       align-items: center;
       gap: 15px;
+      .you-tag{
+        color: $white;
+        font-weight: 700;
+        padding: 1px 5px;
+        background: $moderateBlue;
+        border-radius: 1px;
+      }
       .username-text {
         font-weight: 700;
       }
@@ -169,7 +202,7 @@ export default {
       margin-top: 10px;
     }
   }
-  .reply-button{
+  .left-buttons{
     cursor: pointer;
     display: flex;
     position: absolute;
