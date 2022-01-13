@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "moment": "^2.29.1",
     "node-sass": "^6.0.1",
     "request": "^2.79.0",
     "sass-loader": "^10.2.0",

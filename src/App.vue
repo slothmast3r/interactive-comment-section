@@ -12,7 +12,10 @@
         :user-score="el.userScore"
         :replies="el.replies"
       />
-      <comment-text-area :current-user="currentUser"/>
+      <comment-text-area
+        :current-user="currentUser"
+        @send-reply="sendComment"
+      />
       Challenge by <a
         href="https://www.frontendmentor.io?ref=challenge"
         target="_blank"
@@ -47,7 +50,9 @@ export default {
     }
   },
   methods:{
-
+    sendComment(payload){
+      this.$store.commit('addNewComment',payload)
+    }
   }
 }
 </script>

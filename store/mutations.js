@@ -9,6 +9,9 @@ export const mutations = {
     saveDictionary (state, payload) {
         state.commentDict = payload
     },
+    addNewComment(state,payload){
+        state.comments.push(payload)
+    },
     addUserScoreById(state, payload){
         let id = payload.commentId
         for(let comment of state.comments){
