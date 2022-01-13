@@ -59,15 +59,16 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 
 ### What I learned
 
-```html
-<h1>Some HTML code I'm proud of</h1>
+```js
+import { store } from '../store'
+app.use(store)
 ```
 ```js
 loaderOptions: {
   sass: {
     additionalData: `
     @import "/scss/_variables.scss";
-  @import "/scss/_general.scss";
+    @import "/scss/_general.scss";
     `
   }
 }
