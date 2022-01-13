@@ -43,7 +43,17 @@
             {{ showDate }}
           </div>
         </div>
-        <div class="comment-text">
+        <my-text-area
+          v-if="editActive"
+          :value="commentEditableText"
+
+          style="margin: 20px 0"
+          :label="'edit-comment'"
+        />
+        <div
+          v-else
+          class="comment-text"
+        >
           <div
             v-if="replyingTo"
             class="replying-to"
@@ -69,8 +79,12 @@
           Delete
         </div>
         <div>
-          <div class="edit-button" @click="switchEdit">
-            <img :src="require('@/assets/images/icon-edit.svg')">
+          <div
+            class="edit-button"
+            :class="editActive ? 'activated' : ''"
+            @click="switchEdit"
+          >
+            <edit-icon :active="editActive" />
 
             Edit
           </div>
@@ -99,9 +113,11 @@ import PlusSign from "@/assets/PlusSign";
 import MinusSign from "@/assets/MinusSign";
 import ReplyIcon from "@/assets/ReplyIcon";
 import moment from "moment";
+import EditIcon from "@/assets/EditIcon";
+import MyTextArea from "@/components/MyTextArea";
 export default {
   name: "Comment",
-  components: {ReplyIcon, MinusSign, PlusSign},
+  components: {MyTextArea, EditIcon, ReplyIcon, MinusSign, PlusSign},
   props: {
     ratingScore: {
       default: 0,
@@ -146,6 +162,7 @@ export default {
   data(){
     return {
       editActive: false,
+      commentEditableText: '',
     }
   },
   computed:{
@@ -166,6 +183,12 @@ export default {
     },
     switchEdit(){
       this.editActive = !this.editActive
+      if(this.editActive){
+        this.commentEditableText = this.commentContent
+        if(this.replyingTo){
+          this.commentEditableText = '@'+this.replyingTo + this.commentEditableText
+        }
+      }
     },
     changeScore(score){
       if(score === this.userScore){
@@ -188,7 +211,8 @@ export default {
   background: $white;
   position: relative;
   .comment-rating{
-    padding: 0 5px;
+    height: fit-content;
+    padding: 0 5px 8px 5px;
     color: $moderateBlue;
     font-weight: 700;
     border-radius: 8px;
@@ -203,6 +227,7 @@ export default {
   }
   .content-wrapper {
     margin-left: 20px;
+    width: 100%;
     img{
       width: 30px;
       height: 30px;
@@ -223,6 +248,8 @@ export default {
       }
     }
     .comment-text{
+      overflow-wrap: break-word;
+      word-break: break-all;
       margin-top: 10px;
       .replying-to{
         display: inline;
@@ -241,6 +268,11 @@ export default {
     color: $moderateBlue;
     align-items: center;
     gap: 10px;
+    .edit-button{
+        &.activated{
+       color: $lightGrayishBlue;
+      }
+    }
     .delete-button{
       color: $softRed;
       padding: 0 30px;

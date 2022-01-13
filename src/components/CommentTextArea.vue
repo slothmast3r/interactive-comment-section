@@ -4,14 +4,17 @@
       alt="avatar"
       :src="getImgUrl(currentUser.image.png)"
     >
-    <textarea
+    <my-text-area
       :ref="'textArea'"
       v-model="commentText"
+      :label="'comment'"
+      style="margin: 0 20px"
+      :value="commentText"
       :placeholder="'Add a comment...'"
-      @input="resizeTextArea"
+      @input="textAreaInput"
     />
     <button
-      class="send-button"
+      class="site-button send-button"
       @click="sendReply"
     >
       SEND
@@ -20,8 +23,10 @@
 </template>
 
 <script>
+import MyTextArea from "@/components/MyTextArea";
 export default {
   name: "CommentTextArea",
+  components: {MyTextArea},
   props:{
     currentUser:{
       default: undefined,
@@ -40,11 +45,6 @@ export default {
     getImgUrl(url) {
       return require('@/assets/' + url.substring(2))
     },
-    resizeTextArea(){
-      this.$refs.textArea.style.height = '1px'
-      var scroll_height = this.$refs.textArea.scrollHeight;
-      this.$refs.textArea.style.height = scroll_height + 'px'
-    },
     sendReply(){
       let payload = {
         id: this.$store.state.lastId,
@@ -56,6 +56,9 @@ export default {
       this.$store.commit('increment')
       this.$emit('send-reply',payload)
       this.commentText = ''
+    },
+    textAreaInput(value){
+      this.commentText = value
     }
   }
 }
@@ -75,27 +78,6 @@ export default {
   }
   .send-button{
     right: 20px;
-    font-weight: 700;
-    color: $white;
-    background: $moderateBlue;
-    box-shadow: none;
-    border-radius: 5px;
-    height: fit-content;
-    padding: 10px 20px;
-    border: none;
-    outline: inherit;
-  }
-  textarea{
-    box-sizing: border-box;
-    overflow: hidden;
-    width: 100%;
-    resize: none;
-    min-height: 100px;
-    transition: 0.3s ease;
-    margin: 0 20px;
-    padding: 10px 20px;
-    border-radius: 5px;
-    border: 1px solid $lightGrayishBlue;
   }
 }
 </style>
