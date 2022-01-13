@@ -53,37 +53,42 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 - Semantic HTML5 markup
 - CSS custom properties
 - Flexbox
-- CSS Grid
 - Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
-
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
+- [Vue](https://vuejs.org/) - JS library
+- [Vuex](https://vuex.vuejs.org/) - For data storing
 
 ### What I learned
-
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
-
-To see how you can add code snippets, see below:
 
 ```html
 <h1>Some HTML code I'm proud of</h1>
 ```
-```css
-.proud-of-this-css {
-  color: papayawhip;
+```js
+loaderOptions: {
+  sass: {
+    additionalData: `
+    @import "/scss/_variables.scss";
+  @import "/scss/_general.scss";
+    `
+  }
 }
 ```
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
-}
+```vue
+ <comment
+        v-for="reply in replies"
+        :key="reply.id"
+        :rating-score="reply.score"
+        :comment-content="reply.content"
+        :user="reply.user"
+        :created-at="reply.createdAt"
+        :comment-id="reply.id"
+        :user-score="reply.userScore"
+        :current-user="currentUser"
+        :replying-to="reply.replyingTo"
+      />
 ```
 
 If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
 
-**Note: Delete this note and the content within this section and replace with your own learnings.**
 
 ### Continued development
 
@@ -95,7 +100,6 @@ If you want more help with writing markdown, we'd recommend checking out [The Ma
 - [Load styles globally](https://vueschool.io/articles/vuejs-tutorials/globally-load-sass-into-your-vue-js-applications/) - This helped me to apply styles globally.
 - [Custom input vue](https://dev.to/viniciuskneves/vue-custom-input-bk8) - Making custom input.
 
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
 
 ## Author
 
