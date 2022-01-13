@@ -44,6 +44,12 @@
           </div>
         </div>
         <div class="comment-text">
+          <div
+            v-if="replyingTo"
+            class="replying-to"
+          >
+            {{ '@'+replyingTo }}
+          </div>
           {{ commentContent }}
         </div>
       </div>
@@ -58,8 +64,17 @@
         v-else
         class="left-buttons"
       >
-        <div>Delete</div>
-        <div>Edit</div>
+        <div class="delete-button">
+          <img :src="require('@/assets/images/icon-delete.svg')">
+          Delete
+        </div>
+        <div>
+          <div class="edit-button" @click="switchEdit">
+            <img :src="require('@/assets/images/icon-edit.svg')">
+
+            Edit
+          </div>
+        </div>
       </div>
     </div>
     <div class="reply-wrapper">
@@ -73,6 +88,7 @@
         :comment-id="reply.id"
         :user-score="reply.userScore"
         :current-user="currentUser"
+        :replying-to="reply.replyingTo"
       />
     </div>
   </div>
@@ -120,11 +136,16 @@ export default {
         return {username: ''}
       },
       type: Object
+    },
+    replyingTo: {
+      default: undefined,
+      type: String,
     }
 
   },
   data(){
     return {
+      editActive: false,
     }
   },
   computed:{
@@ -142,6 +163,9 @@ export default {
   methods: {
     getImgUrl(url) {
       return require('@/assets/' + url.substring(2))
+    },
+    switchEdit(){
+      this.editActive = !this.editActive
     },
     changeScore(score){
       if(score === this.userScore){
@@ -192,7 +216,7 @@ export default {
         font-weight: 700;
         padding: 1px 5px;
         background: $moderateBlue;
-        border-radius: 1px;
+        border-radius: 3px;
       }
       .username-text {
         font-weight: 700;
@@ -200,6 +224,11 @@ export default {
     }
     .comment-text{
       margin-top: 10px;
+      .replying-to{
+        display: inline;
+        color: $moderateBlue;
+        font-weight: 700;
+      }
     }
   }
   .left-buttons{
@@ -211,7 +240,11 @@ export default {
     padding: 0 20px;
     color: $moderateBlue;
     align-items: center;
-    gap: 10px
+    gap: 10px;
+    .delete-button{
+      color: $softRed;
+      padding: 0 30px;
+    }
   }
 }
 .reply-wrapper{
