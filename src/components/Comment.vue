@@ -43,13 +43,17 @@
             {{ showDate }}
           </div>
         </div>
-        <my-text-area
+        <div
           v-if="editActive"
-          :value="commentEditableText"
-
-          style="margin: 20px 0"
-          :label="'edit-comment'"
-        />
+        >
+          <my-text-area
+            :value="commentEditableText"
+  
+            style="margin: 20px 0"
+            :label="'edit-comment'"
+          />
+          <button class="site-button"> UPDATE</button>
+        </div>
         <div
           v-else
           class="comment-text"
