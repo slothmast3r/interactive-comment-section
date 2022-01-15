@@ -100,6 +100,7 @@ If you want more help with writing markdown, we'd recommend checking out [The Ma
 ### Useful resources
 - [Load styles globally](https://vueschool.io/articles/vuejs-tutorials/globally-load-sass-into-your-vue-js-applications/) - This helped me to apply styles globally.
 - [Custom input vue](https://dev.to/viniciuskneves/vue-custom-input-bk8) - Making custom input.
+- [mitt](https://github.com/developit/mitt) - something similar to eventbus
 
 
 ## Author
