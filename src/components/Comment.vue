@@ -51,8 +51,14 @@
   
             style="margin: 20px 0"
             :label="'edit-comment'"
+            @input="textAreaInput"
           />
-          <button class="site-button"> UPDATE</button>
+          <button
+            class="site-button"
+            @click="editComment"
+          >
+            UPDATE
+          </button>
         </div>
         <div
           v-else
@@ -79,7 +85,10 @@
         class="left-buttons"
       >
         <div class="delete-button">
-          <img :src="require('@/assets/images/icon-delete.svg')">
+          <img
+            alt="Delete Icon"
+            :src="require('@/assets/images/icon-delete.svg')"
+          >
           Delete
         </div>
         <div>
@@ -190,9 +199,22 @@ export default {
       if(this.editActive){
         this.commentEditableText = this.commentContent
         if(this.replyingTo){
-          this.commentEditableText = '@'+this.replyingTo + this.commentEditableText
+          this.commentEditableText = '@'+this.replyingTo+ ' ' + this.commentEditableText
         }
       }
+    },
+    editComment(){
+      let replyingTo
+      if(this.commentEditableText[0] === '@'){
+        replyingTo = this.commentEditableText.split(' ')[0]
+        this.commentEditableText = this.commentEditableText.substr(replyingTo.length + 1)
+        replyingTo = replyingTo.substring(1)
+      }
+      this.$store.commit('editCommentById', {commentId: this.commentId, commentContent: this.commentEditableText, replyingTo})
+      this.switchEdit()
+    },
+    textAreaInput(input){
+      this.commentEditableText = input
     },
     changeScore(score){
       if(score === this.userScore){

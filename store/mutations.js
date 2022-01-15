@@ -25,5 +25,20 @@ export const mutations = {
                     }
                 }
         }
+    },
+    editCommentById(state,payload){
+        let id = payload.commentId
+        for(let comment of state.comments){
+            if(comment.id === id){
+                comment.content = payload.commentContent
+            }
+            if(comment.replies)
+                for (let reply of comment.replies) {
+                    if(reply.id === id){
+                        reply.content = payload.commentContent
+                        reply.replyingTo = payload.replyingTo
+                    }
+                }
+        }
     }
 }
