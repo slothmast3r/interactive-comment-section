@@ -1,4 +1,5 @@
 <template>
+  <delete-popup></delete-popup>
   <div class="app">
     <div class="attribution">
       <comment
@@ -12,6 +13,7 @@
         :user-score="el.userScore"
         :replies="el.replies"
         :current-user="currentUser"
+        @delete-comment-popup="openDeletePopup"
       />
       <comment-text-area
         :current-user="currentUser"
@@ -31,18 +33,22 @@
 import Comment from "@/components/Comment";
 import data from '/data/data.json';
 import CommentTextArea from "@/components/CommentTextArea";
+import DeletePopup from "./components/DeletePopup";
 
 
 export default {
   name: 'App',
   components: {
     CommentTextArea,
-    Comment
+    Comment,
+    DeletePopup
   },
   data(){
     return{
       currentUser: data.currentUser,
-      comments: data.comments
+      comments: data.comments,
+      showDeletePopup: false,
+      currentCommentId: 0
     }
   },
   created() {
@@ -53,6 +59,11 @@ export default {
   methods:{
     sendComment(payload){
       this.$store.commit('addNewComment',payload)
+    },
+    openDeletePopup(commentId){
+      this.currentCommentId = commentId
+      this.showDeletePopup = true
+
     }
   }
 }

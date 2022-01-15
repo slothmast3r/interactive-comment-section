@@ -84,7 +84,7 @@
         v-else
         class="left-buttons"
       >
-        <div class="delete-button">
+        <div class="delete-button" @click="deleteCommentPopup">
           <img
             alt="Delete Icon"
             :src="require('@/assets/images/icon-delete.svg')"
@@ -172,6 +172,7 @@ export default {
     }
 
   },
+emits: ['delete-comment-popup'],
   data(){
     return {
       editActive: false,
@@ -222,6 +223,9 @@ export default {
       }
       this.$store.commit('addUserScoreById', {commentId: this.commentId, userScore: score})
     },
+    deleteCommentPopup(){
+      this.$emit('delete-comment-popup', this.commentId)
+    }
   }
 
 }
