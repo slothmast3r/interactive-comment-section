@@ -87,6 +87,9 @@ export default {
 body{
 
   background: $veryLightGray;
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
 #app {
   font-family: 'Rubik', sans-serif;
@@ -97,7 +100,6 @@ body{
   margin-top: 60px;
   font-size: 16px;
   align-items: center;
-  margin-left: 15%;
-  margin-right: 15%;
+  width: 750px;
 }
 </style>
