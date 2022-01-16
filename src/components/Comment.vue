@@ -45,6 +45,7 @@
         </div>
         <div
           v-if="editActive"
+          class="edit-wrapper"
         >
           <my-text-area
             :value="commentEditableText"
@@ -279,6 +280,14 @@ emits: ['delete-comment-popup'],
       }
       .username-text {
         font-weight: 700;
+      }
+    }
+    .edit-wrapper{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      .site-button{
+        width: fit-content;
       }
     }
     .comment-text{
