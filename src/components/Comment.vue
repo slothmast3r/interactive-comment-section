@@ -84,7 +84,10 @@
         v-else
         class="left-buttons"
       >
-        <div class="delete-button" @click="deleteCommentPopup(commentId)">
+        <div
+          class="delete-button"
+          @click="deleteCommentPopup(commentId)"
+        >
           <img
             alt="Delete Icon"
             :src="require('@/assets/images/icon-delete.svg')"
