@@ -292,7 +292,6 @@ emits: ['delete-comment-popup'],
     }
     .comment-text{
       overflow-wrap: break-word;
-      word-break: break-all;
       margin-top: 10px;
       .replying-to{
         display: inline;
@@ -323,7 +322,7 @@ emits: ['delete-comment-popup'],
   }
 }
 .reply-wrapper{
-  border-left: 1px solid $lightGray;
+  border-left: 2px solid $lightGray;
   padding-left: 20px;
   margin-left: 50px;
 }
