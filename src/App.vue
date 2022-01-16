@@ -1,5 +1,9 @@
 <template>
-  <delete-popup></delete-popup>
+  <delete-popup
+    v-if="showDeletePopup"
+    @cancel="closePopup"
+    @confirm="confirmDelete"
+  />
   <div class="app">
     <div class="attribution">
       <comment
@@ -64,6 +68,14 @@ export default {
       this.currentCommentId = commentId
       this.showDeletePopup = true
 
+    },
+    closePopup(){
+      this.showDeletePopup = false
+      this.currentCommentId = 0
+    },
+    confirmDelete(){
+      this.$store.commit('deleteComment', this.currentCommentId)
+      this.closePopup()
     }
   }
 }
