@@ -41,5 +41,21 @@ export const mutations = {
             comment.content = payload.commentContent
             comment.replyingTo = payload.replyingTo
         }
-    }
+    },
+    deleteComment(state,id){
+
+        for (let i = 0; i < state.comments.length; i++) {
+            let comment = state.comments[i]
+            if(comment.id === id){
+                state.comments.splice(i, 1);
+            }
+            if(comment.replies)
+                for (let j = 0; j < comment.replies.length; j++) {
+                    let reply = comment.replies[j]
+                    if(reply.id === id){
+                        comment.replies.splice(j, 1);
+                    }
+                }
+        }
+    },
 }
