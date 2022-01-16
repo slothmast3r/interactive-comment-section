@@ -77,8 +77,10 @@
       <div
         v-if="!isYou"
         class="left-buttons"
+        :class="showReplySection ? 'activated' : '' "
+        @click="replyToAComment"
       >
-        <reply-icon :active="false" />
+        <reply-icon :active="showReplySection" />
         <div>Reply</div>
       </div>
       <div
@@ -108,6 +110,13 @@
         </div>
       </div>
     </div>
+    <comment-text-area
+      v-if="showReplySection"
+      :current-user="currentUser"
+      :replying-to="user"
+      :reply-comment-id="replyingTo? parentCommentId : commentId"
+      @send-reply="sendReply"
+    />
     <div class="reply-wrapper">
       <comment
         v-for="reply in replies"
@@ -118,6 +127,7 @@
         :created-at="reply.createdAt"
         :comment-id="reply.id"
         :user-score="reply.userScore"
+        :parent-comment-id="commentId"
         :current-user="currentUser"
         :replying-to="reply.replyingTo"
         @delete-comment-popup="deleteCommentPopup(reply.id)"
@@ -133,9 +143,10 @@ import ReplyIcon from "@/assets/ReplyIcon";
 import moment from "moment";
 import EditIcon from "@/assets/EditIcon";
 import MyTextArea from "@/components/MyTextArea";
+import CommentTextArea from "./CommentTextArea";
 export default {
   name: "Comment",
-  components: {MyTextArea, EditIcon, ReplyIcon, MinusSign, PlusSign},
+  components: {CommentTextArea, MyTextArea, EditIcon, ReplyIcon, MinusSign, PlusSign},
   props: {
     ratingScore: {
       default: 0,
@@ -174,6 +185,10 @@ export default {
     replyingTo: {
       default: undefined,
       type: String,
+    },
+    parentCommentId:{
+      default: null,
+      type: Number
     }
 
   },
@@ -182,6 +197,7 @@ emits: ['delete-comment-popup'],
     return {
       editActive: false,
       commentEditableText: '',
+      showReplySection: false,
     }
   },
   computed:{
@@ -199,6 +215,9 @@ emits: ['delete-comment-popup'],
   methods: {
     getImgUrl(url) {
       return require('@/assets/' + url.substring(2))
+    },
+    replyToAComment(){
+      this.showReplySection = !this.showReplySection
     },
     switchEdit(){
       this.editActive = !this.editActive
@@ -230,6 +249,13 @@ emits: ['delete-comment-popup'],
     },
     deleteCommentPopup(id){
       this.$emit('delete-comment-popup', id)
+    },
+    sendReply(payload){
+      if(payload.content[0][0] === '@'){
+        payload.content = payload.content.substr(payload.content.indexOf(' ')+1)
+      }
+      this.$store.commit('sendReply',payload)
+      this.replyToAComment()
     }
   }
 
@@ -239,7 +265,7 @@ emits: ['delete-comment-popup'],
 <style scoped lang="scss">
 
 .comment-wrapper{
-  margin: 20px;
+  margin: 20px 20px 10px 20px;
   border-radius: 5px;
   padding: 15px;
   display: flex;
@@ -310,9 +336,12 @@ emits: ['delete-comment-popup'],
     color: $moderateBlue;
     align-items: center;
     gap: 10px;
+    &.activated{
+      color: $lightGrayishBlue;
+    }
     .edit-button{
-        &.activated{
-       color: $lightGrayishBlue;
+      &.activated{
+        color: $lightGrayishBlue;
       }
     }
     .delete-button{
@@ -321,9 +350,13 @@ emits: ['delete-comment-popup'],
     }
   }
 }
+
 .reply-wrapper{
   border-left: 2px solid $lightGray;
   padding-left: 20px;
   margin-left: 50px;
+}
+/deep/ .add-comment-wrapper{
+  margin: 10px 20px;
 }
 </style>

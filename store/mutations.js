@@ -43,7 +43,6 @@ export const mutations = {
         }
     },
     deleteComment(state,id){
-
         for (let i = 0; i < state.comments.length; i++) {
             let comment = state.comments[i]
             if(comment.id === id){
@@ -58,4 +57,9 @@ export const mutations = {
                 }
         }
     },
+    sendReply(state,payload){
+        console.log(payload)
+        let comment = findComment(state,payload.replyCommentId)
+        comment.replies.push(payload)
+    }
 }

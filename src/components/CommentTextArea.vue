@@ -17,7 +17,7 @@
       class="site-button send-button"
       @click="sendReply"
     >
-      SEND
+      {{ replyingTo? 'REPLY':'SEND' }}
     </button>
   </div>
 </template>
@@ -31,6 +31,14 @@ export default {
     currentUser:{
       default: undefined,
       type: Object,
+    },
+    replyingTo:{
+      default: undefined,
+      type: Object
+    },
+    replyCommentId:{
+      default: undefined,
+      type: Number
     }
   },
   emits: ['send-reply'],
@@ -40,6 +48,8 @@ export default {
     }
   },
   created() {
+    if(this.replyingTo)
+      this.commentText = '@'+this.replyingTo.username + ' '
   },
   methods:{
     getImgUrl(url) {
@@ -51,7 +61,9 @@ export default {
         content: this.commentText,
         score: 0,
         user: this.currentUser,
-        createdAt: new Date()
+        createdAt: new Date(),
+        replyingTo : this.replyingTo? this.replyingTo.username:undefined,
+        replyCommentId: this.replyCommentId
       }
       this.$store.commit('increment')
       this.$emit('send-reply',payload)
