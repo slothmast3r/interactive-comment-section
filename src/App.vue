@@ -67,7 +67,7 @@ export default {
     openDeletePopup(commentId){
       this.currentCommentId = commentId
       this.showDeletePopup = true
-
+      console.log(commentId)
     },
     closePopup(){
       this.showDeletePopup = false

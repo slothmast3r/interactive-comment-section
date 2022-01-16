@@ -36,7 +36,6 @@ export const mutations = {
     },
     editCommentById(state,payload){
         let id = payload.commentId
-
         let comment = findComment(state, id)
         if(comment){
             comment.content = payload.commentContent
