@@ -1,6 +1,9 @@
 <template>
   <div class="delete-wrapper">
-    <div class="content-wrapper">
+    <div
+      v-click-outside="()=>close"
+      class="content-wrapper"
+    >
       <div class="title">
         Delete Comment
       </div>
@@ -10,7 +13,7 @@
       <div class="buttons">
         <button
           class="site-button cancel"
-          @click="$emit('cancel')"
+          @click="close"
         >
           NO, CANCEL
         </button>
@@ -26,9 +29,20 @@
 </template>
 
 <script>
+
+
+import clickOutside from 'click-outside-vue3'
 export default {
   name: "DeletePopup",
-  emits: ['confirm', 'cancel']
+  directives:{
+    clickOutside: clickOutside
+  },
+  emits: ['confirm', 'cancel'],
+  methods:{
+    close(){
+      this.$emit('cancel')
+    }
+  }
 }
 </script>
 
