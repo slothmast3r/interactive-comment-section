@@ -116,7 +116,7 @@
         :user-score="reply.userScore"
         :current-user="currentUser"
         :replying-to="reply.replyingTo"
-        @click="deleteCommentPopup(reply.id)"
+        @delete-comment-popup="deleteCommentPopup(reply.id)"
       />
     </div>
   </div>
