@@ -355,6 +355,10 @@ emits: ['delete-comment-popup'],
   border-left: 2px solid $lightGray;
   padding-left: 20px;
   margin-left: 50px;
+  @media screen and (max-width: 375px){
+    margin-left: 20px;
+    padding-left: 0;
+  }
 }
 /deep/ .add-comment-wrapper{
   margin: 10px 20px;
