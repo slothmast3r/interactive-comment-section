@@ -271,6 +271,10 @@ emits: ['delete-comment-popup'],
   display: flex;
   background: $white;
   position: relative;
+  @media screen and (max-width: 375px) {
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
   .comment-rating{
     height: fit-content;
     padding: 0 5px 8px 5px;
@@ -279,16 +283,32 @@ emits: ['delete-comment-popup'],
     border-radius: 8px;
     text-align: center;
     background: $veryLightGray;
+
+    @media screen and (max-width: 375px) {
+      display: flex;
+      width: fit-content;
+      padding: 0;
+      justify-content: center;
+    }
     .sign{
       cursor: pointer;
     }
     .element{
       margin: 5px 5px;
+      @media screen and (max-width: 375px){
+        display: flex;
+        align-items: center;
+      }
+    }
+    .minus{
     }
   }
   .content-wrapper {
     margin-left: 20px;
     width: 100%;
+    @media screen and (max-width: 375px){
+      margin-left: 0;
+    }
     img{
       width: 30px;
       height: 30px;
