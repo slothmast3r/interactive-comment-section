@@ -271,7 +271,7 @@ emits: ['delete-comment-popup'],
   display: flex;
   background: $white;
   position: relative;
-  @media screen and (max-width: 375px) {
+  @media screen and (max-width: $mobilePhoneWidth) {
     flex-direction: column-reverse;
     gap: 10px;
   }
@@ -284,7 +284,7 @@ emits: ['delete-comment-popup'],
     text-align: center;
     background: $veryLightGray;
 
-    @media screen and (max-width: 375px) {
+    @media screen and (max-width: $mobilePhoneWidth) {
       display: flex;
       width: fit-content;
       padding: 0;
@@ -295,7 +295,7 @@ emits: ['delete-comment-popup'],
     }
     .element{
       margin: 5px 5px;
-      @media screen and (max-width: 375px){
+      @media screen and (max-width: $mobilePhoneWidth){
         display: flex;
         align-items: center;
       }
@@ -306,7 +306,7 @@ emits: ['delete-comment-popup'],
   .content-wrapper {
     margin-left: 20px;
     width: 100%;
-    @media screen and (max-width: 375px){
+    @media screen and (max-width: $mobilePhoneWidth){
       margin-left: 0;
     }
     img{
@@ -375,7 +375,7 @@ emits: ['delete-comment-popup'],
   border-left: 2px solid $lightGray;
   padding-left: 20px;
   margin-left: 50px;
-  @media screen and (max-width: 375px){
+  @media screen and (max-width: $mobilePhoneWidth){
     margin-left: 20px;
     padding-left: 0;
   }

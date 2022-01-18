@@ -2,13 +2,14 @@
   <div class="add-comment-wrapper">
     <img
       alt="avatar"
+      class="avatar"
       :src="getImgUrl(currentUser.image.png)"
     >
     <my-text-area
       :ref="'textArea'"
       v-model="commentText"
       :label="'comment'"
-      style="margin: 0 20px"
+      class="text-area"
       :value="commentText"
       :placeholder="'Add a comment...'"
       @input="textAreaInput"
@@ -84,12 +85,27 @@ export default {
   display: flex;
   background: $white;
   position: relative;
+  .avatar{
+  }
+  @media screen and (max-width: $mobilePhoneWidth){
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+  .text-area{
+    margin: 0 20px;
+    @media screen and (max-width: $mobilePhoneWidth){
+      margin: 0;
+    }
+  }
   img{
     width: 40px;
     height: 40px;
   }
   .send-button{
     right: 20px;
+    @media screen and (max-width: $mobilePhoneWidth){
+      position: absolute;
+    }
   }
 }
 </style>
