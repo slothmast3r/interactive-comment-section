@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint",
     "deploy": "node scripts/deploy.js"
   },
+  "type": "module",
   "dependencies": {
     "click-outside-vue3": "^4.0.1",
     "core-js": "^3.6.5",
