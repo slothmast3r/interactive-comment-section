@@ -20,7 +20,11 @@
     "vue": "^3.0.0",
     "vuex": "^4.0.2",
     "vuex-persistedstate": "^4.1.0",
-    "esm": "*"
+    "esm": "*",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7",
+    "swagger-jsdoc": "6.0.0",
+    "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
